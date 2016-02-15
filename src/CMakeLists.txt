@@ -15,7 +15,7 @@ target_link_libraries(THAP.out readline)
 include_directories("${PROJECT_BINARY_DIR}")
 
 find_package(PkgConfig)
-pkg_check_modules(LIBSOUP REQUIRED libsoup)
+pkg_check_modules(LIBSOUP REQUIRED libsoup-2.4)
 include_directories(${LIBSOUP_INCLUDE_DIRS})
 link_directories(${LIBSOUP_LIBRARY_DIRS})
 target_link_libraries (THAP.out ${LIBSOUP_LIBRARIES})
