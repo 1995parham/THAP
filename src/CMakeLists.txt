@@ -6,7 +6,8 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable(THAP.out main.c)
+add_executable(THAP.out main.c
+	prl.c prl.h)
 
 target_link_libraries(THAP.out readline)
 
