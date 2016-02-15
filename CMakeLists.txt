@@ -20,6 +20,12 @@ add_subdirectory(src)
 set(THAP_MAJOR_VERSION 1)
 set(THAP_MINOR_VERSION 0)
 
+# Configuration header file
+configure_file(
+	"${PROJECT_SOURCE_DIR}/config.h.in"
+	"${PROJECT_BINARY_DIR}/config.h"
+	)
+
 # Add personal c flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11 ")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -DDEBUG")
