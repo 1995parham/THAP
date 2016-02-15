@@ -17,10 +17,11 @@
 #include <stdlib.h>
 
 #include "prl.h"
+#include "config.h"
 
 int main(int argc, char *argv[])
 {
-	printf("THAP version \n");
+	printf("THAP version %d.%d\n", THAP_MAJOR_VERSION, THAP_MINOR_VERSION);
 	printf("Copyright (C) 2016 Parham Alvani (parham.alvani@gmail.com)\n");
 	printf("THAP comes with ABSOLUTELY NO WARRANTY; for details type `show w'.\n");
 	printf("This is free software, and you are welcome to redistribute it\n");
