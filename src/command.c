@@ -18,6 +18,7 @@
 #include <time.h>
 
 #include "command.h"
+#include "session.h"
 
 /*
  * Commands in this program have the following foramt:
@@ -32,6 +33,16 @@
 void quit_command(void)
 {
 	exit(0);
+}
+
+void session_command(void)
+{
+	session_init();
+}
+
+void get_command(const char *url)
+{
+	session_new_connection("GET", url);
 }
 
 void show_command(char c)
@@ -131,8 +142,19 @@ void command_dispatcher(const char *command)
 			printf("show [c|w]\n");
 			return;
 		}
-
 		show_command(c);
+	} else if (!strcmp(verb, "session")) {
+		session_command();
+	} else if (!strcmp(verb, "get")) {
+		char url[1024];
+		int len;
+
+		len = sscanf(command, "%s %s", verb, url);
+		if (len < 2) {
+			printf("get url\n");
+			return;
+		}
+		get_command(url);
 	} else {
 		printf("404 Not Found :D\n");
 	}
