@@ -18,6 +18,7 @@
 
 #include "prl.h"
 #include "config.h"
+#include "command.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,5 +36,6 @@ int main(int argc, char *argv[])
 		sprintf(prompt, "THAP $ ");
 		prl_set_prompt(prompt);
 		command = prl_gets();
+		command_dispatcher(command);
 	}
 }
