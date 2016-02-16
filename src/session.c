@@ -12,6 +12,7 @@
  * Copyright (c) 2016 Parham Alvani.
 */
 #include <libsoup/soup.h>
+#include <glib.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <time.h>
@@ -34,14 +35,15 @@ int session_new_connection(const char *method, const char *url)
 
 	SoupMessage *msg;
 	uint32_t status;
-	time_t t1, t2;
+	GTimer *t;
 
 	msg = soup_message_new(method, url);
-	time(&t1);
+	t = g_timer_new();
+	g_timer_start(t);
 	status = soup_session_send_message(session, msg);
-	time(&t2);
+	g_timer_stop(t);
 	
-	printf("Response time: %lus\n", t2 - t1);
+	printf("Response time: %gs\n", g_timer_elapsed(t, NULL));
 	printf("Message index [use this index for further information]: %d\n", ++counter);
 	messages_add(msg, counter);
 
