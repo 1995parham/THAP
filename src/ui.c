@@ -25,5 +25,6 @@ void ui_print_message(int index)
 	msg = message_get(index);
 	if (!msg)
 		return;
-	printf("Server: %s", soup_message_headers_get_one(msg->response_headers, "Server"));
+	printf("Status code: %u\n", msg->status_code);
+	printf("Server: %s\n", soup_message_headers_get_one(msg->response_headers, "Server"));
 }
