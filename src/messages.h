@@ -16,8 +16,8 @@
 
 #include <libsoup/soup.h>
 
-void messages_add(SoupMessage *msg, uint64_t index);
+void messages_add(SoupMessage *msg, int index);
 
-SoupMessage *message_get(uint64_t index);
+SoupMessage *message_get(int index);
 
 #endif

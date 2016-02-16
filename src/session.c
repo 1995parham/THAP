@@ -20,14 +20,14 @@
 #include "messages.h"
 
 static SoupSession *session;
-static uint64_t counter;
+static int counter;
 
 static void session_init(void)
 {
 	session = soup_session_new();
 }
 
-uint64_t session_new_connection(const char *method, const char *url)
+int session_new_connection(const char *method, const char *url)
 {
 	if (!session)
 		session_init();

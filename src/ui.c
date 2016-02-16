@@ -18,7 +18,7 @@
 #include "messages.h"
 #include "ui.h"
 
-void ui_print_message(uint64_t index)
+void ui_print_message(int index)
 {
 	SoupMessage *msg;
 	

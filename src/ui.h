@@ -15,8 +15,6 @@
 #ifndef UI_H
 #define UI_H
 
-#include <stdint.h>
-
-void ui_print_message(uint64_t index);
+void ui_print_message(int index);
 
 #endif

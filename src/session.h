@@ -15,8 +15,6 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <stdint.h>
-
-uint64_t session_new_connection(const char *method, const char *url);
+int session_new_connection(const char *method, const char *url);
 
 #endif

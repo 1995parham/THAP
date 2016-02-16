@@ -16,10 +16,10 @@
 #include <string.h>
 #include <stdint.h>
 #include <time.h>
-#include <stdint.h>
 
 #include "command.h"
 #include "session.h"
+#include "ui.h"
 
 /*
  * Commands in this program have the following foramt:
@@ -38,7 +38,10 @@ void quit_command(void)
 
 void get_command(const char *url)
 {
-	session_new_connection("GET", url);
+	int index;
+
+	index = session_new_connection("GET", url);
+	ui_print_message(index);
 }
 
 void show_command(char c)
