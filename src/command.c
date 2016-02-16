@@ -35,11 +35,6 @@ void quit_command(void)
 	exit(0);
 }
 
-void session_command(void)
-{
-	session_init();
-}
-
 void get_command(const char *url)
 {
 	session_new_connection("GET", url);
@@ -143,8 +138,6 @@ void command_dispatcher(const char *command)
 			return;
 		}
 		show_command(c);
-	} else if (!strcmp(verb, "session")) {
-		session_command();
 	} else if (!strcmp(verb, "get")) {
 		char url[1024];
 		int len;
