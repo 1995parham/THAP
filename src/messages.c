@@ -15,6 +15,8 @@
 #include <glib.h>
 #include <stdint.h>
 
+#include "messages.h"
+
 static GHashTable *m;
 
 static void messages_init(void)
