@@ -27,7 +27,7 @@ static void session_init(void)
 	session = soup_session_new();
 }
 
-int session_new_connection(const char *method, const char *url)
+uint64_t session_new_connection(const char *method, const char *url)
 {
 	if (!session)
 		session_init();
