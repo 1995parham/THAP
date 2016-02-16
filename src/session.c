@@ -42,7 +42,7 @@ int session_new_connection(const char *method, const char *url)
 	time(&t2);
 	
 	printf("Response time: %lus\n", t2 - t1);
-	printf("Message index [use this index for further information]: %lu\n", ++counter);
+	printf("Message index [use this index for further information]: %d\n", ++counter);
 	messages_add(msg, counter);
 
 	return counter;
