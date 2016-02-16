@@ -17,16 +17,21 @@
 #include <time.h>
 
 #include "session.h"
+#include "messages.h"
 
 static SoupSession *session;
+static uint64_t counter;
 
-void session_init(void)
+static void session_init(void)
 {
 	session = soup_session_new();
 }
 
 int session_new_connection(const char *method, const char *url)
 {
+	if (!session)
+		session_init();
+
 	SoupMessage *msg;
 	uint32_t status;
 	time_t t1, t2;
@@ -37,8 +42,8 @@ int session_new_connection(const char *method, const char *url)
 	time(&t2);
 	
 	printf("Response time: %lus\n", t2 - t1);
-	printf("Status: %d\n", status);
-	printf("Server: %s\n", soup_message_headers_get_one(msg->response_headers, "Server"));
+	printf("Message index [use this index for further information]: %lu\n", ++counter);
+	messages_add(msg, counter);
 
-	return status;
+	return counter;
 }
