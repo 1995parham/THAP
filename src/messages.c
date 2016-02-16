@@ -35,6 +35,6 @@ SoupMessage *message_get(uint64_t index)
 {
 	if (!m)
 		messages_init();
-	return g_hash_table_lookup (m, &index);
+	return g_hash_table_lookup(m, &index);
 }
 
