@@ -15,8 +15,6 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-void session_init(void);
-
 int session_new_connection(const char *method, const char *url);
 
 #endif
