@@ -42,7 +42,55 @@ int session_new_connection(const char *method, const char *url)
 	g_timer_start(t);
 	status = soup_session_send_message(session, msg);
 	g_timer_stop(t);
-	
+
+	switch (status) {
+	case SOUP_STATUS_CANCELLED:
+		printf("ERR: Message was cancelled locally\n");
+		return -1;
+		break;
+	case SOUP_STATUS_CANT_RESOLVE:
+		printf("ERR: Unable to resolve destination host name\n");
+		return -1;
+		break;
+	case SOUP_STATUS_CANT_RESOLVE_PROXY:
+		printf("ERR: Unable to resolve proxy host name\n");
+		return -1;
+		break;
+	case SOUP_STATUS_CANT_CONNECT:
+		printf("ERR: Unable to connect to remote host\n");
+		return -1;
+		break;
+	case SOUP_STATUS_CANT_CONNECT_PROXY:
+		printf("ERR: Unable to connect to proxy\n");
+		return -1;
+		break;
+	case SOUP_STATUS_SSL_FAILED:
+		printf("ERR: SSL/TLS negotiation failed\n");
+		return -1;
+		break;
+	case SOUP_STATUS_IO_ERROR:
+		printf("ERR: A network error occurred,\n");
+		printf("or the other end closed the connection unexpectedly\n");
+		return -1;
+		break;
+	case SOUP_STATUS_MALFORMED:
+		printf("ERR: Malformed data (usually a programmer error)\n");
+		return -1;
+		break;
+	case SOUP_STATUS_TRY_AGAIN:
+		printf("ERR: Used internally\n");
+		return -1;
+		break;
+	case SOUP_STATUS_TOO_MANY_REDIRECTS:
+		printf("ERR: There were too many redirections\n");
+		return -1;
+		break;
+	case SOUP_STATUS_TLS_FAILED:
+		printf("ERR: Used internally\n");
+		return -1;
+		break;
+	}
+
 	printf("Response time: %gs\n", g_timer_elapsed(t, NULL));
 	printf("Message index [use this index for further information]: %d\n", ++counter);
 	messages_add(msg, counter);
