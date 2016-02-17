@@ -53,6 +53,7 @@ void methods_command(const char *url)
 	index = session_new_connection("OPTIONS", url);
 	if (index < 0)
 		return;
+	ui_print_methods(index);
 }
 
 void show_command(char c)
