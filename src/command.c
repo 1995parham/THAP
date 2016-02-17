@@ -46,6 +46,15 @@ void get_command(const char *url)
 	ui_print_message(index);
 }
 
+void methods_command(const char *url)
+{
+	int index;
+
+	index = session_new_connection("OPTIONS", url);
+	if (index < 0)
+		return;
+}
+
 void show_command(char c)
 {
 	switch (c) {
@@ -144,13 +153,23 @@ void command_dispatcher(const char *command)
 			return;
 		}
 		show_command(c);
+	} else if (!strcmp(verb, "methods")) {
+		char url[1024];
+		int len;
+
+		len = sscanf(command, "%s %s", verb, url);
+		if (len < 2) {
+			printf("methods [url]\n");
+			return;
+		}
+		methods_command(url);
 	} else if (!strcmp(verb, "get")) {
 		char url[1024];
 		int len;
 
 		len = sscanf(command, "%s %s", verb, url);
 		if (len < 2) {
-			printf("get url\n");
+			printf("get [url]\n");
 			return;
 		}
 		get_command(url);
