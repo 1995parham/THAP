@@ -28,3 +28,13 @@ void ui_print_message(int index)
 	printf("Status code: %u\n", msg->status_code);
 	printf("Server: %s\n", soup_message_headers_get_one(msg->response_headers, "Server"));
 }
+
+void ui_print_methods(int index)
+{
+	SoupMessage *msg;
+	
+	msg = message_get(index);
+	if (!msg)
+		return;	
+	printf("Methods: %s\n", soup_message_headers_get_one(msg->response_headers, "Allow"));
+}
