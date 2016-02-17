@@ -41,6 +41,8 @@ void get_command(const char *url)
 	int index;
 
 	index = session_new_connection("GET", url);
+	if (index < 0)
+		return;
 	ui_print_message(index);
 }
 
