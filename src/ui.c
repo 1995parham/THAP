@@ -37,5 +37,9 @@ void ui_print_methods(int index)
 	if (!msg)
 		return;	
 	printf("Status code: %u\n", msg->status_code);
-	printf("Methods: %s\n", soup_message_headers_get_one(msg->response_headers, "Allow"));
+	const char *methods = soup_message_headers_get_one(msg->response_headers, "Allow");
+	if (methods)
+		printf("Methods: %s\n", methods);
+	else
+		printf("Methods: OPTIONS HTTP verb was not allowed\n");
 }
