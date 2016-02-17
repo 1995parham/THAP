@@ -36,5 +36,6 @@ void ui_print_methods(int index)
 	msg = message_get(index);
 	if (!msg)
 		return;	
+	printf("Status code: %u\n", msg->status_code);
 	printf("Methods: %s\n", soup_message_headers_get_one(msg->response_headers, "Allow"));
 }
