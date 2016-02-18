@@ -12,6 +12,7 @@
  * Copyright (c) 2016 Parham Alvani.
 */
 #include <libsoup/soup.h>
+#include <glib.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -42,4 +43,37 @@ void ui_print_methods(int index)
 		printf("Methods: %s\n", methods);
 	else
 		printf("Methods: OPTIONS HTTP verb was not allowed\n");
+}
+
+void ui_print_cookie(void *cookie, void *data)
+{
+	printf("\tName: %s\n", soup_cookie_get_name(cookie));
+	printf("\tValue: %s\n", soup_cookie_get_value(cookie));
+	printf("\tDomain: %s\n", soup_cookie_get_domain(cookie));
+	printf("\tPath: %s\n", soup_cookie_get_path(cookie));
+	printf("\tExpires Data: %s\n",
+			soup_date_to_string(
+				soup_cookie_get_expires(cookie), SOUP_DATE_COOKIE));
+	if (soup_cookie_get_secure(cookie))
+		printf("\tSecure: True\n");
+	else
+		printf("\tSecure: False\n");
+	if (soup_cookie_get_http_only(cookie))
+		printf("\tHTTP Only: True\n");
+	else
+		printf("\tHTTP Only: False\n");
+	printf("-------------\n");
+}
+
+void ui_print_cookies(int index)
+{
+	SoupMessage *msg;
+
+	msg = message_get(index);
+	if (!msg)
+		return;
+	GSList *c = soup_cookies_from_response(msg);
+	printf("Cookies:\n");
+	g_slist_foreach(c, ui_print_cookie, NULL);
+	soup_cookies_free(c);
 }
