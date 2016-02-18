@@ -44,6 +44,7 @@ void get_command(const char *url)
 	if (index < 0)
 		return;
 	ui_print_message(index);
+	ui_print_cookies(index);
 }
 
 void methods_command(const char *url)
