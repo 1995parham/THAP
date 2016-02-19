@@ -17,6 +17,8 @@
 
 void ui_print_message(int index);
 
+void ui_print_general(int index);
+
 void ui_print_methods(int index);
 
 void ui_print_cookies(int index);

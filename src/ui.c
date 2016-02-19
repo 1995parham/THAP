@@ -21,6 +21,12 @@
 
 void ui_print_message(int index)
 {
+	ui_print_general(index);
+	ui_print_cookies(index);
+}
+
+void ui_print_general(int index)
+{
 	SoupMessage *msg;
 
 	msg = message_get(index);
