@@ -21,4 +21,6 @@ void auth_callback(SoupSession *session, SoupMessage *msg,
 
 SoupAuth *auth_get(int index);
 
+void auth_authenticate(int index, const char *username, const char *password);
+
 #endif
