@@ -36,4 +36,3 @@ SoupMessage *message_get(int index)
 		messages_init();
 	return g_hash_table_lookup(m, GINT_TO_POINTER(index));
 }
-
