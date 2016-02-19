@@ -17,12 +17,14 @@
 #include <stdio.h>
 
 #include "messages.h"
+#include "auth.h"
 #include "ui.h"
 
 void ui_print_message(int index)
 {
 	ui_print_general(index);
 	ui_print_cookies(index);
+	ui_print_auth(index);
 }
 
 void ui_print_general(int index)
@@ -35,6 +37,24 @@ void ui_print_general(int index)
 	printf("Status code: %u %s\n",
 			msg->status_code, msg->reason_phrase);
 	printf("Server: %s\n", soup_message_headers_get_one(msg->response_headers, "Server"));
+}
+
+void ui_print_auth(int index)
+{
+	SoupAuth *auth;
+
+	auth = auth_get(index);
+	if (!auth)
+		return;
+
+	printf("Authentication Scheme: %s\n", soup_auth_get_scheme_name(auth));
+	printf("Authentication Host: %s\n", soup_auth_get_host(auth));
+	printf("Authentication Realm: %s\n", soup_auth_get_realm(auth));
+	printf("Authentication Info: %s\n", soup_auth_get_info(auth));
+	if (soup_auth_is_for_proxy(auth))
+		printf("Authentication for Proxy: True\n");
+	else
+		printf("Authentication for Proxy: False\n");
 }
 
 void ui_print_methods(int index)
