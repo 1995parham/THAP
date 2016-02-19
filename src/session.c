@@ -25,7 +25,7 @@ static int counter;
 
 static void session_init(void)
 {
-	session = soup_session_new();
+	session = soup_session_new_with_options(SOUP_SESSION_USER_AGENT, "THAP", NULL);
 }
 
 int session_new_connection(const char *method, const char *url)
