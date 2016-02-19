@@ -53,4 +53,5 @@ void auth_authenticate(int index, const char *username, const char *password)
 	auth = g_hash_table_lookup(a, GINT_TO_POINTER(index));
 	if (!auth)
 		return;
+	soup_auth_authenticate(auth, username, password);
 }
