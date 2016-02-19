@@ -19,6 +19,7 @@
 
 #include "session.h"
 #include "messages.h"
+#include "auth.h"
 
 static SoupSession *session;
 static int counter;
@@ -26,6 +27,7 @@ static int counter;
 static void session_init(void)
 {
 	session = soup_session_new_with_options(SOUP_SESSION_USER_AGENT, "THAP", NULL);
+	g_signal_connect(session, "authenticate", G_CALLBACK(auth_callback), &counter);
 }
 
 int session_new_connection(const char *method, const char *url)
