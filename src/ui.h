@@ -19,6 +19,8 @@ void ui_print_message(int index);
 
 void ui_print_general(int index);
 
+void ui_print_cache(int index);
+
 void ui_print_auth(int index);
 
 void ui_print_methods(int index);

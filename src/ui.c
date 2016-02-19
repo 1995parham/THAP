@@ -25,6 +25,7 @@ void ui_print_message(int index)
 	ui_print_general(index);
 	ui_print_cookies(index);
 	ui_print_auth(index);
+	ui_print_cache(index);
 }
 
 void ui_print_general(int index)
@@ -37,6 +38,31 @@ void ui_print_general(int index)
 	printf("Status code: %u %s\n",
 			msg->status_code, msg->reason_phrase);
 	printf("Server: %s\n", soup_message_headers_get_one(msg->response_headers, "Server"));
+}
+
+void ui_print_cache(int index)
+{
+	SoupMessage *msg;
+	const char *expires;
+	const char *last_modified;
+	const char *etag;
+	const char *cache_control;
+
+	msg = message_get(index);
+	if (!msg)
+		return;
+	expires = soup_message_headers_get_one(msg->response_headers, "Expires");
+	last_modified = soup_message_headers_get_one(msg->response_headers, "Last-Modified");
+	etag = soup_message_headers_get_one(msg->response_headers, "ETag");
+	cache_control = soup_message_headers_get_one(msg->response_headers, "Cache-Control");
+	if (!expires)
+		printf("Expires: %s\n", expires);
+	if (!etag)
+		printf("ETag: %s\n", etag);
+	if (!last_modified)
+		printf("Last-Modified: %s\n", last_modified);
+	if (!cache_control)
+		printf("Cache-Control: %s\n", cache_control);
 }
 
 void ui_print_auth(int index)
@@ -60,14 +86,14 @@ void ui_print_auth(int index)
 void ui_print_methods(int index)
 {
 	SoupMessage *msg;
+	const char *methods;
 
 	msg = message_get(index);
 	if (!msg)
 		return;
 	printf("Status code: %u\n", msg->status_code);
 	
-	const char *methods = soup_message_headers_get_one(msg->response_headers, "Allow");
-	
+	methods = soup_message_headers_get_one(msg->response_headers, "Allow");
 	if (methods)
 		printf("Methods: %s\n", methods);
 	else
