@@ -11,7 +11,8 @@ add_executable(THAP.out main.c
 	command.c command.h
 	session.c session.h
 	messages.c messages.h
-	ui.c ui.h)
+	ui.c ui.h
+	auth.c auth.h)
 
 target_link_libraries(THAP.out readline)
 
