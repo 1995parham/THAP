@@ -22,7 +22,7 @@
 void ui_print_message(int index)
 {
 	SoupMessage *msg;
-	
+
 	msg = message_get(index);
 	if (!msg)
 		return;
@@ -33,12 +33,14 @@ void ui_print_message(int index)
 void ui_print_methods(int index)
 {
 	SoupMessage *msg;
-	
+
 	msg = message_get(index);
 	if (!msg)
-		return;	
+		return;
 	printf("Status code: %u\n", msg->status_code);
+	
 	const char *methods = soup_message_headers_get_one(msg->response_headers, "Allow");
+	
 	if (methods)
 		printf("Methods: %s\n", methods);
 	else
@@ -51,9 +53,10 @@ void ui_print_cookie(void *cookie, void *data)
 	printf("\tValue: %s\n", soup_cookie_get_value(cookie));
 	printf("\tDomain: %s\n", soup_cookie_get_domain(cookie));
 	printf("\tPath: %s\n", soup_cookie_get_path(cookie));
-	printf("\tExpires Data: %s\n",
-			soup_date_to_string(
-				soup_cookie_get_expires(cookie), SOUP_DATE_COOKIE));
+	if (soup_cookie_get_expires(cookie))
+		printf("\tExpires Date: %s\n",
+				soup_date_to_string(
+					soup_cookie_get_expires(cookie), SOUP_DATE_COOKIE));
 	if (soup_cookie_get_secure(cookie))
 		printf("\tSecure: True\n");
 	else
