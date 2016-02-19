@@ -55,13 +55,13 @@ void ui_print_cache(int index)
 	last_modified = soup_message_headers_get_one(msg->response_headers, "Last-Modified");
 	etag = soup_message_headers_get_one(msg->response_headers, "ETag");
 	cache_control = soup_message_headers_get_one(msg->response_headers, "Cache-Control");
-	if (!expires)
+	if (expires)
 		printf("Expires: %s\n", expires);
-	if (!etag)
+	if (etag)
 		printf("ETag: %s\n", etag);
-	if (!last_modified)
+	if (last_modified)
 		printf("Last-Modified: %s\n", last_modified);
-	if (!cache_control)
+	if (cache_control)
 		printf("Cache-Control: %s\n", cache_control);
 }
 
