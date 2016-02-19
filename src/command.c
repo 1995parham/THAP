@@ -56,6 +56,11 @@ void methods_command(const char *url)
 	ui_print_methods(index);
 }
 
+void info_command(int index)
+{
+	ui_print_message(index);
+}
+
 void show_command(char c)
 {
 	switch (c) {
@@ -174,6 +179,16 @@ void command_dispatcher(const char *command)
 			return;
 		}
 		get_command(url);
+	} else if (!strcmp(verb, "info")) {
+		int index;
+		int len;
+
+		len = sscanf(command, "%s %d", verb, &index);
+		if (len < 2) {
+			printf("info [index]\n");
+			return;
+		}
+		info_command(index);
 	} else {
 		printf("404 Not Found :D\n");
 	}
