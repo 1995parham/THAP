@@ -46,6 +46,16 @@ void get_command(const char *url)
 	ui_print_message(index);
 }
 
+void head_command(const char *url)
+{
+	int index;
+
+	index = session_new_connection("HEAD", url);
+	if (index < 0)
+		return;
+	ui_print_message(index);
+}
+
 void methods_command(const char *url)
 {
 	int index;
@@ -169,6 +179,16 @@ void command_dispatcher(const char *command)
 			return;
 		}
 		methods_command(url);
+	} else if (!strcmp(verb, "head")) {
+		char url[1024];
+		int len;
+
+		len = sscanf(command, "%s %s", verb, url);
+		if (len < 2) {
+			printf("head [url]\n");
+			return;
+		}
+		head_command(url);
 	} else if (!strcmp(verb, "get")) {
 		char url[1024];
 		int len;
