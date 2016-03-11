@@ -9,6 +9,9 @@
 cmake_minimum_required(VERSION 2.6)
 project(THAP)
 
+# Use CPack for our packaging process :)))
+include(CPack)
+
 # Set porject imformation
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib")
