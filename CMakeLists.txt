@@ -10,6 +10,11 @@ cmake_minimum_required(VERSION 2.6)
 project(THAP)
 
 # Use CPack for our packaging process :)))
+set(CPACK_GENERATOR "DEB")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsoup-2.4-1 (>= 2.50.0)")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Parham Alvani <parham.alvani@gmail.com>")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The HTTP Analyzer Program")
+set(CPACK_PACKAGE_DESCRIPTION "Simple HTTP request sender and analyze :)")
 include(CPack)
 
 # Set porject imformation
